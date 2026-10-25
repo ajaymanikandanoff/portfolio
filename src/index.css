@@ -550,49 +550,101 @@ img {
   color: var(--text-main);
 }
 
-/* Portrait Frame */
-.hero-portrait-col {
+/* ============================================================
+   FRAMELESS TRANSPARENT CUTOUT PORTRAIT (NO BOX)
+   ============================================================ */
+.hero-cutout-col {
   display: flex;
-  justify-content: flex-end;
-}
-
-.portrait-frame {
-  width: 100%;
-  max-width: 380px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-card);
-  padding: 12px;
-  box-shadow: var(--shadow-editorial);
+  justify-content: center;
+  align-items: center;
   position: relative;
-  border-radius: 2px;
-  transition: all 0.3s ease;
 }
 
-.portrait-frame:hover {
-  border-color: var(--border-strong);
-  transform: translateY(-4px);
-}
-
-.portrait-image {
+.cutout-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  height: 420px;
-  object-fit: cover;
-  object-position: center top;
-  filter: contrast(1.04);
-  border: 1px solid var(--border-color);
-  border-radius: 2px;
-  transition: filter 0.3s ease, transform 0.3s ease;
+  max-width: 440px;
 }
 
-.portrait-frame:hover .portrait-image {
-  filter: contrast(1.08) brightness(1.02);
+.cutout-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+body[data-theme='light'] .cutout-ambient-glow {
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.02) 40%, transparent 70%);
+}
+
+.cutout-portrait-image {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  max-width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  display: block;
+  /* Natural drop-shadow on the cutout body without any box */
+  filter: drop-shadow(0 22px 32px rgba(0, 0, 0, 0.55));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body[data-theme='light'] .cutout-portrait-image {
+  filter: drop-shadow(0 20px 28px rgba(0, 0, 0, 0.16));
+}
+
+.cutout-portrait-image:hover {
+  transform: translateY(-8px) scale(1.02);
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.65));
+}
+
+body[data-theme='light'] .cutout-portrait-image:hover {
+  filter: drop-shadow(0 26px 36px rgba(0, 0, 0, 0.22));
+}
+
+.cutout-floating-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+  border-radius: 2px;
+  z-index: 2;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.cutout-tag-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--text-main);
 }
 
 .portrait-fallback {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  height: 420px;
+  max-width: 320px;
+  height: 380px;
   border: 1px dashed var(--border-strong);
   background: var(--tag-bg);
   display: flex;
@@ -601,6 +653,7 @@ img {
   justify-content: center;
   padding: 24px;
   text-align: center;
+  border-radius: 2px;
 }
 
 .fallback-monogram {
@@ -618,32 +671,6 @@ img {
   font-weight: 700;
   color: var(--text-main);
   margin-bottom: 8px;
-}
-
-.fallback-hint {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.fallback-hint code {
-  font-family: monospace;
-  background: var(--bg-card);
-  padding: 2px 5px;
-  border: 1px solid var(--border-color);
-}
-
-.portrait-caption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
-  font-family: 'Space Grotesk', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  padding-top: 8px;
-  border-top: 1px solid var(--border-color);
 }
 
 /* Infinite Ticker Tape */
@@ -1647,11 +1674,9 @@ img {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .hero-portrait-col {
-    justify-content: flex-start;
-  }
-  .portrait-frame {
-    max-width: 100%;
+  .hero-cutout-col {
+    justify-content: center;
+    margin-top: 10px;
   }
   .disciplines-grid {
     grid-template-columns: 1fr;
@@ -1694,11 +1719,19 @@ img {
   .hero-actions-rect-group .btn-rect {
     width: 100%;
   }
-  .portrait-frame {
-    max-width: 100%;
+  .cutout-stage {
+    max-width: 320px;
   }
-  .portrait-image, .portrait-fallback {
-    height: 300px;
+  .cutout-portrait-image {
+    max-height: 350px;
+  }
+  .cutout-ambient-glow {
+    width: 260px;
+    height: 260px;
+  }
+  .portrait-fallback {
+    max-width: 100%;
+    height: 280px;
   }
   .hero-specs-row {
     grid-template-columns: repeat(2, 1fr);

@@ -69,28 +69,26 @@ export default function Hero({ onOpenResume }) {
             </div>
           </div>
 
-          {/* Right Column: Picture Frame */}
-          <div className="hero-portrait-col">
-            <div className="portrait-frame">
+          {/* Right Column: Frameless Cutout Portrait */}
+          <div className="hero-cutout-col">
+            <div className="cutout-stage">
+              <div className="cutout-ambient-glow"></div>
               {!imgError ? (
                 <img
-                  src={profile.photo}
+                  src={profile.photo || '/me.png'}
                   alt={profile.name}
-                  className="portrait-image"
+                  className="cutout-portrait-image"
                   onError={() => setImgError(true)}
                 />
               ) : (
                 <div className="portrait-fallback">
                   <div className="fallback-monogram">AM</div>
                   <div className="fallback-label">{profile.name}</div>
-                  <p className="fallback-hint">
-                    Add your photo to <code>public/me.jpg</code>
-                  </p>
                 </div>
               )}
-              <div className="portrait-caption">
-                <span className="caption-title">{profile.name}</span>
-                <span className="caption-sub">DEV &amp; CREATIVE</span>
+              <div className="cutout-floating-tag">
+                <span className="cutout-tag-dot"></span>
+                <span>{profile.name} — FULL STACK &amp; CREATIVE</span>
               </div>
             </div>
           </div>

@@ -11,7 +11,7 @@ export const content = {
     tagline: 'Full-stack software engineering, UI/UX design in Figma, and video creation.',
     location: 'India',
     status: 'Available for Internships & Full-Time Roles',
-    photo: '/me.jpg', // Place your picture in public/me.jpg to show here
+    photo: '/me.png', // Transparent cutout
     resumeUrl: '/resume.pdf',
     bio: "I'm a computer science student and aspiring full stack developer. I build functional web applications across the stack with Java, React, Python, and JavaScript, design intuitive interfaces in Figma, and do video editing. I'm also an active lyrical video editor and meme creator.",
   },
