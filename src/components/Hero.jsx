@@ -72,7 +72,6 @@ export default function Hero({ onOpenResume }) {
           {/* Right Column: Frameless Cutout Portrait */}
           <div className="hero-cutout-col">
             <div className="cutout-stage">
-              <div className="cutout-ambient-glow"></div>
               {!imgError ? (
                 <div className="cutout-image-wrapper">
                   <img
@@ -81,7 +80,6 @@ export default function Hero({ onOpenResume }) {
                     className="cutout-portrait-image"
                     onError={() => setImgError(true)}
                   />
-                  <div className="cutout-bottom-fade" aria-hidden="true"></div>
                 </div>
               ) : (
                 <div className="portrait-fallback">
