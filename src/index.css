@@ -558,6 +558,7 @@ img {
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-top: -38px; /* Shifted up as requested */
 }
 
 .cutout-stage {
@@ -575,10 +576,11 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 380px;
-  height: 380px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 70%);
+  /* White ambient glow for dark mode */
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 45%, transparent 70%);
   filter: blur(50px);
   pointer-events: none;
   z-index: 0;
@@ -586,7 +588,8 @@ img {
 }
 
 body[data-theme='light'] .cutout-ambient-glow {
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.02) 40%, transparent 70%);
+  /* Black ambient glow for light mode */
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.02) 45%, transparent 70%);
 }
 
 .cutout-portrait-image {
@@ -594,27 +597,28 @@ body[data-theme='light'] .cutout-ambient-glow {
   z-index: 1;
   width: auto;
   max-width: 100%;
-  max-height: 500px;
+  max-height: 520px;
   object-fit: contain;
   display: block;
-  /* Natural drop-shadow on the cutout body without any box */
-  filter: drop-shadow(0 22px 32px rgba(0, 0, 0, 0.55));
+  /* WHITE SHADOW FOR DARK MODE */
+  filter: drop-shadow(0 15px 35px rgba(255, 255, 255, 0.22)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.12));
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-body[data-theme='light'] .cutout-portrait-image {
-  filter: drop-shadow(0 20px 28px rgba(0, 0, 0, 0.16));
-}
-
 .cutout-portrait-image:hover {
   transform: translateY(-8px) scale(1.02);
-  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.65));
+  filter: drop-shadow(0 20px 45px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.22));
+}
+
+/* BLACK SHADOW FOR LIGHT MODE */
+body[data-theme='light'] .cutout-portrait-image {
+  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.32)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.18));
 }
 
 body[data-theme='light'] .cutout-portrait-image:hover {
-  filter: drop-shadow(0 26px 36px rgba(0, 0, 0, 0.22));
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.45)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.26));
 }
 
 .cutout-floating-tag {
