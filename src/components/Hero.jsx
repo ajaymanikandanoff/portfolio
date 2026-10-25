@@ -18,27 +18,27 @@ export default function Hero({ onOpenResume }) {
           <div className="hero-meta-location">
             <span>{profile.location}</span>
             <span>/</span>
-            <span>2026 EDITION</span>
+            <span>PORTFOLIO 2026</span>
           </div>
         </div>
 
-        {/* Massive Name Headline */}
-        <div className="hero-name-block">
-          <h1 className="hero-mega-name">{hero.title}</h1>
-          <div className="hero-role-tagline">{hero.subtitle}</div>
-        </div>
-
-        {/* Main Content Split: Bio & Photo Card */}
+        {/* 2-Column Split: Left = Name & Details | Right = Picture */}
         <div className="hero-editorial-split">
-          {/* Left: Manifesto & Action Rectangles */}
+          {/* Left Column: Name & Details */}
           <div className="hero-narrative-col">
+            <div className="hero-name-header">
+              <span className="hero-eyebrow-intro">HELLO, I'M</span>
+              <h1 className="hero-clean-name">{profile.name}</h1>
+              <div className="hero-role-tagline">{profile.role}</div>
+            </div>
+
             <p className="hero-statement">{hero.summary}</p>
 
             <div className="hero-discipline-strip">
               <span className="discipline-tag">FULL STACK (JAVA &amp; REACT)</span>
-              <span className="discipline-tag">UI/UX DESIGN (FIGMA)</span>
-              <span className="discipline-tag">VIDEO EDITING &amp; MOTION</span>
-              <span className="discipline-tag">APPLIED AI &amp; PROMPTS</span>
+              <span className="discipline-tag">UI/UX (FIGMA)</span>
+              <span className="discipline-tag">VIDEO EDITING</span>
+              <span className="discipline-tag">APPLIED AI</span>
             </div>
 
             {/* Rectangular Action Buttons */}
@@ -69,7 +69,7 @@ export default function Hero({ onOpenResume }) {
             </div>
           </div>
 
-          {/* Right: Editorial Monochrome Photo Frame */}
+          {/* Right Column: Picture Frame */}
           <div className="hero-portrait-col">
             <div className="portrait-frame">
               {!imgError ? (
@@ -82,22 +82,22 @@ export default function Hero({ onOpenResume }) {
               ) : (
                 <div className="portrait-fallback">
                   <div className="fallback-monogram">AM</div>
-                  <div className="fallback-label">Ajay M</div>
+                  <div className="fallback-label">{profile.name}</div>
                   <p className="fallback-hint">
-                    Drop your photo into <code>public/me.jpg</code> to display here
+                    Add your photo to <code>public/me.jpg</code>
                   </p>
                 </div>
               )}
               <div className="portrait-caption">
-                <span className="caption-title">AJAY M.</span>
-                <span className="caption-sub">DEVELOPER &amp; CREATOR</span>
+                <span className="caption-title">{profile.name}</span>
+                <span className="caption-sub">DEV &amp; CREATIVE</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Awwwards Minimalist Marquee / Ticker */}
+      {/* Infinite Ticker Tape */}
       <div className="hero-ticker-wrap" aria-hidden="true">
         <div className="ticker-track">
           <span>FULL STACK DEVELOPER</span>
