@@ -592,6 +592,14 @@ body[data-theme='light'] .cutout-ambient-glow {
   background: radial-gradient(circle, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.02) 45%, transparent 70%);
 }
 
+.cutout-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .cutout-portrait-image {
   position: relative;
   z-index: 1;
@@ -600,6 +608,9 @@ body[data-theme='light'] .cutout-ambient-glow {
   max-height: 520px;
   object-fit: contain;
   display: block;
+  /* Smooth bottom fading effect via CSS mask */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 64%, rgba(0, 0, 0, 0.7) 80%, rgba(0, 0, 0, 0.2) 93%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 64%, rgba(0, 0, 0, 0.7) 80%, rgba(0, 0, 0, 0.2) 93%, transparent 100%);
   /* WHITE SHADOW FOR DARK MODE */
   filter: drop-shadow(0 15px 35px rgba(255, 255, 255, 0.22)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.12));
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
@@ -621,11 +632,28 @@ body[data-theme='light'] .cutout-portrait-image:hover {
   filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.45)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.26));
 }
 
+/* Bottom gradient fade overlay blending into canvas background */
+.cutout-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(9, 9, 11, 0.4) 40%, var(--bg-page) 100%);
+  pointer-events: none;
+  z-index: 2;
+  transition: background 0.25s ease;
+}
+
+body[data-theme='light'] .cutout-bottom-fade {
+  background: linear-gradient(to bottom, transparent 0%, rgba(248, 248, 249, 0.4) 40%, var(--bg-page) 100%);
+}
+
 .cutout-floating-tag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: -12px;
   padding: 6px 14px;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -635,8 +663,8 @@ body[data-theme='light'] .cutout-portrait-image:hover {
   letter-spacing: 0.08em;
   color: var(--text-main);
   border-radius: 2px;
-  z-index: 2;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  z-index: 3;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
 .cutout-tag-dot {

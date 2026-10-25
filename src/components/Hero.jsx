@@ -74,12 +74,15 @@ export default function Hero({ onOpenResume }) {
             <div className="cutout-stage">
               <div className="cutout-ambient-glow"></div>
               {!imgError ? (
-                <img
-                  src={profile.photo || '/me.png'}
-                  alt={profile.name}
-                  className="cutout-portrait-image"
-                  onError={() => setImgError(true)}
-                />
+                <div className="cutout-image-wrapper">
+                  <img
+                    src={profile.photo || '/me.png'}
+                    alt={profile.name}
+                    className="cutout-portrait-image"
+                    onError={() => setImgError(true)}
+                  />
+                  <div className="cutout-bottom-fade" aria-hidden="true"></div>
+                </div>
               ) : (
                 <div className="portrait-fallback">
                   <div className="fallback-monogram">AM</div>
