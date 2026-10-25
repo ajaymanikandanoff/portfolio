@@ -1,40 +1,42 @@
 import { content } from '../data/content.js'
-import { Icon } from './Icons.jsx'
 
 export default function Certifications() {
   const certifications = content.certifications || []
 
   return (
-    <section className="section-padding certs-section" id="certifications">
+    <section className="section-block certs-editorial-section" id="certifications">
       <div className="container">
-        <div className="section-header-centered">
-          <div className="section-badge">Foundations</div>
-          <h2 className="section-headline">Coursework &amp; Certifications</h2>
-          <p className="section-subheadline">
-            Academic training and verified coursework building strong fundamentals across programming paradigms.
+        <div className="section-editorial-header">
+          <div className="header-eyebrow-row">
+            <span className="eyebrow-num">04 / FOUNDATIONS</span>
+            <span className="eyebrow-divider"></span>
+            <span className="eyebrow-count">COURSEWORK &amp; TRAINING</span>
+          </div>
+          <h2 className="editorial-title">VERIFIED COURSEWORK</h2>
+          <p className="editorial-desc">
+            Academic coursework and formal training across programming paradigms, memory, and algorithms.
           </p>
         </div>
 
-        <div className="certs-grid">
-          {certifications.map((c) => (
-            <div key={c.name} className="cert-item-card">
-              <div className="cert-card-top">
-                <span className="cert-tag-pill">{c.tag}</span>
-                <div className="cert-status-badge">
-                  <Icon name="badge-check" size={16} />
-                  <span>Verified</span>
-                </div>
-              </div>
+        <div className="certs-table-wrap">
+          <div className="certs-table-header">
+            <span>DOMAIN / LANGUAGE</span>
+            <span>PROFICIENCY LEVEL</span>
+            <span>ISSUER / STATUS</span>
+          </div>
 
-              <h3 className="cert-item-title">{c.name}</h3>
-              <p className="cert-level">{c.level}</p>
-              
-              <div className="cert-card-bottom">
-                <span className="cert-issuer">{c.issuer}</span>
-                <span className="cert-check-indicator">Active</span>
+          <div className="certs-table-rows">
+            {certifications.map((c) => (
+              <div key={c.name} className="cert-table-row">
+                <span className="cert-name-cell">{c.name}</span>
+                <span className="cert-level-cell">{c.level}</span>
+                <span className="cert-issuer-cell">
+                  <span className="cert-dot-indicator"></span>
+                  {c.issuer}
+                </span>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

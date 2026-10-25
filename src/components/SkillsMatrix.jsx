@@ -1,73 +1,75 @@
 import { content } from '../data/content.js'
-import { Icon } from './Icons.jsx'
 
 export default function SkillsMatrix() {
-  const skillCategories = content.skillCategories || []
-  const tools = content.tools || []
+  const { skills } = content
 
   return (
-    <section className="section-padding skills-section" id="skills">
+    <section className="section-block skills-section" id="skills">
       <div className="container">
-        {/* Section Title */}
-        <div className="section-header-centered">
-          <div className="section-badge">Capabilities</div>
-          <h2 className="section-headline">Tech Stack &amp; Core Tooling</h2>
-          <p className="section-subheadline">
-            The programming languages, frameworks, AI engines, and backend technologies I actively leverage to design and ship software.
+        <div className="section-editorial-header">
+          <div className="header-eyebrow-row">
+            <span className="eyebrow-num">02 / CORE CAPABILITIES</span>
+            <span className="eyebrow-divider"></span>
+            <span className="eyebrow-count">TECH &amp; CREATIVE MATRIX</span>
+          </div>
+          <h2 className="editorial-title">DISCIPLINES &amp; TOOLING</h2>
+          <p className="editorial-desc">
+            A balanced toolkit combining full-stack software development with visual UI/UX craftsmanship and video editing.
           </p>
         </div>
 
-        {/* Bento Skills Matrix */}
-        <div className="skills-bento-grid">
-          {skillCategories.map((cat) => (
-            <div key={cat.name} className="skill-category-card">
-              <div className="skill-card-top">
-                <div className="skill-icon-wrap">
-                  <Icon name={cat.icon || 'code'} size={20} />
-                </div>
-                <div>
-                  <h3 className="skill-cat-title">{cat.name}</h3>
-                  <p className="skill-cat-desc">{cat.description}</p>
-                </div>
-              </div>
-
-              <div className="skill-tags-list">
-                {(cat.skills || []).map((skill) => (
-                  <span key={skill} className="skill-badge-item">
-                    <span className="skill-dot"></span>
-                    {skill}
-                  </span>
-                ))}
-              </div>
+        <div className="disciplines-grid">
+          {/* Engineering Column */}
+          <div className="discipline-card">
+            <div className="disc-header">
+              <span className="disc-num">[01]</span>
+              <h3 className="disc-title">Software &amp; Web Engineering</h3>
+              <p className="disc-sub">Languages, frameworks, APIs and persistent backend databases.</p>
             </div>
-          ))}
-        </div>
-
-        {/* Specialized AI Tools Row */}
-        {tools.length > 0 && (
-          <div className="specialized-tools-wrap">
-            <div className="tools-headline-row">
-              <div>
-                <h3 className="specialized-title">AI Coding Assistants &amp; Workflow Engines</h3>
-                <p className="specialized-desc">How I accelerate architecture, debugging, and experimentation.</p>
-              </div>
-            </div>
-
-            <div className="specialized-tools-grid">
-              {tools.map((t) => (
-                <div key={t.name} className="tool-deep-card">
-                  <div className="tool-badge-row">
-                    <span className="tool-tag-pill">{t.tag}</span>
-                    <span className="tool-status-live">Integrated</span>
-                  </div>
-                  <h4 className="tool-name">{t.name}</h4>
-                  <div className="tool-role">{t.role}</div>
-                  <p className="tool-desc-text">{t.desc}</p>
+            <div className="disc-list">
+              {skills.engineering.map((skill) => (
+                <div key={skill} className="disc-item">
+                  <span className="disc-bullet">■</span>
+                  <span className="disc-name">{skill}</span>
                 </div>
               ))}
             </div>
           </div>
-        )}
+
+          {/* Creative Column */}
+          <div className="discipline-card">
+            <div className="disc-header">
+              <span className="disc-num">[02]</span>
+              <h3 className="disc-title">UI/UX &amp; Media Editing</h3>
+              <p className="disc-sub">Interface prototyping in Figma, visual design, and video creation.</p>
+            </div>
+            <div className="disc-list">
+              {skills.creative.map((skill) => (
+                <div key={skill} className="disc-item">
+                  <span className="disc-bullet">■</span>
+                  <span className="disc-name">{skill}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Applied AI Column */}
+          <div className="discipline-card">
+            <div className="disc-header">
+              <span className="disc-num">[03]</span>
+              <h3 className="disc-title">AI Tooling &amp; Prompt Engineering</h3>
+              <p className="disc-sub">Leveraging reasoning models and vision engines to accelerate delivery.</p>
+            </div>
+            <div className="disc-list">
+              {skills.aiAndTools.map((skill) => (
+                <div key={skill} className="disc-item">
+                  <span className="disc-bullet">■</span>
+                  <span className="disc-name">{skill}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

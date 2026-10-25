@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
+import { content } from '../data/content.js'
 
-export default function Footer() {
+export default function Footer({ onOpenResume }) {
   const [istTime, setIstTime] = useState('')
 
   useEffect(() => {
@@ -9,12 +10,13 @@ export default function Footer() {
         timeZone: 'Asia/Kolkata',
         hour: '2-digit',
         minute: '2-digit',
+        second: '2-digit',
         hour12: true,
       }
       setIstTime(new Intl.DateTimeFormat('en-IN', options).format(new Date()))
     }
     updateTime()
-    const timer = setInterval(updateTime, 30000)
+    const timer = setInterval(updateTime, 1000)
     return () => clearInterval(timer)
   }, [])
 
@@ -23,42 +25,56 @@ export default function Footer() {
   }
 
   return (
-    <footer className="site-footer">
-      <div className="container footer-container">
-        <div className="footer-left">
-          <div className="footer-brand">
-            <span className="brand-dot"></span>
-            <span className="brand-name">Ajay Manikandan</span>
+    <footer className="editorial-footer">
+      <div className="container">
+        <div className="footer-meta-grid">
+          <div className="footer-col-brand">
+            <span className="footer-huge-name">{content.profile.name}</span>
+            <p className="footer-role-text">
+              Aspiring Full Stack Developer &amp; Creative Technologist.
+            </p>
           </div>
-          <p className="footer-tagline">
-            Building software at the intersection of full-stack engineering &amp; applied AI.
-          </p>
+
+          <div className="footer-col-links">
+            <span className="footer-col-header">INDEX</span>
+            <div className="footer-links-list">
+              <a href="#top">Top of Page</a>
+              <a href="#work">Selected Works</a>
+              <a href="#skills">Disciplines &amp; Skills</a>
+              <a href="#about">About Ajay</a>
+              <a href="#contact">Contact</a>
+              <button onClick={onOpenResume} className="footer-text-btn">
+                Download Resume ↓
+              </button>
+            </div>
+          </div>
+
+          <div className="footer-col-clock">
+            <span className="footer-col-header">LOCATION &amp; TIME</span>
+            <div className="footer-clock-box">
+              <span className="clock-city">INDIA (IST / UTC +5:30)</span>
+              <span className="clock-time">{istTime || '12:00:00 PM'}</span>
+            </div>
+            <div className="footer-github-source">
+              <a
+                href="https://github.com/ajaymanikandanoff/portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-source-anchor"
+              >
+                <span>github.com/ajaymanikandanoff/portfolio ↗</span>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div className="footer-center">
-          <div className="footer-time-badge">
-            <span className="time-dot"></span>
-            <span>Local Time (IST): <b>{istTime || 'Active'}</b></span>
+        <div className="footer-bottom-bar">
+          <div className="copyright-text">
+            © {new Date().getFullYear()} {content.profile.name}. ALL RIGHTS RESERVED.
           </div>
-          <div className="footer-tech-stack">
-            <a
-              href="https://github.com/ajaymanikandanoff/portfolio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-repo-link"
-            >
-              <span>View Portfolio Source Code ↗</span>
-            </a>
-          </div>
-        </div>
-
-        <div className="footer-right">
-          <button onClick={scrollToTop} className="btn-back-to-top" title="Back to top">
-            <span>Back to top ↑</span>
+          <button onClick={scrollToTop} className="btn-rect-top">
+            <span>BACK TO TOP ↑</span>
           </button>
-          <div className="footer-copyright">
-            © {new Date().getFullYear()} Ajay M. All rights reserved.
-          </div>
         </div>
       </div>
     </footer>

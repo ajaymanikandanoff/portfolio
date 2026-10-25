@@ -2,93 +2,79 @@ import { useState } from 'react'
 import { content } from '../data/content.js'
 import { Icon } from './Icons.jsx'
 
-export default function Contact() {
-  const contact = content.contact || {}
-  const links = contact.links || []
+export default function Contact({ onOpenResume }) {
+  const { contact } = content
   const [copied, setCopied] = useState(false)
 
   const copyEmail = () => {
-    if (contact.email) {
-      navigator.clipboard.writeText(contact.email)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2400)
-    }
-  }
-
-  const getIconForLabel = (label) => {
-    const l = label.toLowerCase()
-    if (l.includes('github')) return 'github'
-    if (l.includes('linkedin')) return 'linkedin'
-    if (l.includes('instagram')) return 'instagram'
-    return 'mail'
+    navigator.clipboard.writeText(contact.email)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2400)
   }
 
   return (
-    <section className="section-padding contact-section" id="contact">
+    <section className="section-block contact-editorial-section" id="contact">
       <div className="container">
-        {/* Banner Card */}
-        <div className="contact-main-card">
-          <div className="contact-ambient-light"></div>
-          
-          <div className="contact-header-content">
-            <div className="status-pill inline-flex">
-              <span className="status-indicator">
-                <span className="indicator-ping"></span>
-                <span className="indicator-core"></span>
-              </span>
-              <span className="status-pill-text">Open for Internships &amp; Collaborations</span>
-            </div>
-
-            <h2 className="contact-big-title">{contact.heading}</h2>
-            <p className="contact-lead-desc">{contact.subheading}</p>
-
-            <div className="contact-primary-actions">
-              <a
-                href={`mailto:${contact.email}?subject=Project%20or%20Opportunity%20Inquiry`}
-                className="btn btn-primary-gradient"
-              >
-                <Icon name="mail" size={17} />
-                <span>Send Direct Email</span>
-              </a>
-
-              <button
-                onClick={copyEmail}
-                className={`btn btn-copy-highlight ${copied ? 'copied' : ''}`}
-              >
-                <Icon name={copied ? 'check' : 'copy'} size={17} />
-                <span>{copied ? 'Copied to Clipboard! 🎉' : contact.email}</span>
-              </button>
-            </div>
+        <div className="contact-editorial-frame">
+          <div className="contact-top-strip">
+            <span className="contact-eyebrow">05 / GET IN TOUCH</span>
+            <span className="contact-status-flag">OPEN FOR OPPORTUNITIES</span>
           </div>
 
-          {/* Social Cards Grid */}
-          <div className="contact-social-grid">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith('mailto:') ? '_self' : '_blank'}
-                rel="noopener noreferrer"
-                className="contact-channel-card"
-              >
-                <div className="channel-icon-wrap">
-                  <Icon name={getIconForLabel(link.label)} size={20} />
-                </div>
-                <div className="channel-info">
-                  <div className="channel-title-row">
-                    <span className="channel-name">{link.label}</span>
-                    <Icon name="arrow-up-right" size={14} className="channel-arrow" />
-                  </div>
-                  <div className="channel-handle">{link.handle}</div>
-                  <div className="channel-desc">{link.desc}</div>
-                </div>
-              </a>
-            ))}
-          </div>
+          <div className="contact-main-grid">
+            <div className="contact-lead-col">
+              <h2 className="contact-giant-title">{contact.title}</h2>
+              <p className="contact-statement">{contact.subtitle}</p>
 
-          <div className="contact-footer-note">
-            <span className="reply-pulse"></span>
-            <span>Typical response time: within 24 hours • Direct timezone: IST (UTC +5:30)</span>
+              <div className="contact-action-rects">
+                <a
+                  href={`mailto:${contact.email}?subject=Opportunity%20Inquiry`}
+                  className="btn-rect btn-rect-primary"
+                >
+                  <Icon name="mail" size={16} />
+                  <span>SEND DIRECT EMAIL</span>
+                </a>
+
+                <button
+                  onClick={copyEmail}
+                  className={`btn-rect btn-rect-outline ${copied ? 'active' : ''}`}
+                >
+                  <Icon name={copied ? 'check' : 'copy'} size={15} />
+                  <span>{copied ? 'EMAIL COPIED! ✓' : contact.email}</span>
+                </button>
+
+                <button
+                  onClick={onOpenResume}
+                  className="btn-rect btn-rect-ghost"
+                >
+                  <span>DOWNLOAD RESUME ↓</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="contact-links-col">
+              <div className="links-col-header">DIRECT CHANNELS</div>
+              <div className="contact-channels-stack">
+                {contact.links.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={link.href.startsWith('mailto:') ? '_self' : '_blank'}
+                    rel="noopener noreferrer"
+                    className="channel-editorial-row"
+                  >
+                    <div className="channel-meta-left">
+                      <span className="channel-type-tag">[{link.type}]</span>
+                      <span className="channel-label-main">{link.label}</span>
+                    </div>
+                    <div className="channel-meta-right">
+                      <span className="channel-handle-text">{link.handle}</span>
+                      <Icon name="arrow-up-right" size={14} className="channel-jump-icon" />
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

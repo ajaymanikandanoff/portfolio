@@ -1,70 +1,56 @@
 import { content } from '../data/content.js'
-import { Icon } from './Icons.jsx'
 
-export default function About() {
-  const about = content.about || {}
-  const profile = content.profile || {}
-  const story = about.story || []
-  const traits = about.traits || []
-  const pillars = about.pillars || []
+export default function About({ onOpenResume }) {
+  const { about, profile } = content
 
   return (
-    <section className="section-padding about-section" id="about">
+    <section className="section-block about-editorial-section" id="about">
       <div className="container">
-        <div className="section-header-centered">
-          <div className="section-badge">Story &amp; Identity</div>
-          <h2 className="section-headline">{about.title || 'About Ajay'}</h2>
-          <p className="section-subheadline">{about.subtitle || ''}</p>
+        <div className="section-editorial-header">
+          <div className="header-eyebrow-row">
+            <span className="eyebrow-num">03 / BACKGROUND</span>
+            <span className="eyebrow-divider"></span>
+            <span className="eyebrow-count">PHILOSOPHY &amp; PROFILE</span>
+          </div>
+          <h2 className="editorial-title">{about.heading}</h2>
+          <p className="editorial-desc">{about.subheading}</p>
         </div>
 
-        <div className="about-bento-layout">
-          {/* Left Column: Narrative Card */}
-          <div className="about-story-card">
-            <div className="story-header">
-              <div className="avatar-chip">
-                <span className="avatar-initials">AM</span>
-              </div>
-              <div>
-                <h3 className="story-author">{profile.fullName || 'Ajay M'} <span className="nickname-tag">(Ajay)</span></h3>
-                <p className="story-role">{profile.role || 'Aspiring Full Stack Developer'}</p>
-              </div>
+        <div className="about-editorial-grid">
+          {/* Left: Long Narrative */}
+          <div className="about-narrative-box">
+            <div className="narrative-badge">
+              <span>PROFILE / {profile.name}</span>
             </div>
 
-            <div className="story-paragraphs">
-              {story.map((paragraph, idx) => (
-                <p key={idx} className="story-text">
-                  {paragraph}
+            <div className="narrative-body">
+              {about.paragraphs.map((p, i) => (
+                <p key={i} className="narrative-p">
+                  {p}
                 </p>
               ))}
             </div>
 
-            <div className="about-quick-specs">
-              {traits.map((t) => (
-                <div key={t.label} className="spec-row">
-                  <span className="spec-label">{t.label}:</span>
-                  <span className="spec-val">{t.value}</span>
-                </div>
-              ))}
-              <div className="spec-row">
-                <span className="spec-label">Music &amp; Edits:</span>
-                <span className="spec-val">Lyrical Video Creator (@asp.offx)</span>
+            <div className="about-resume-cta-strip">
+              <div>
+                <span className="cta-strip-title">Detailed Experience &amp; Credentials</span>
+                <p className="cta-strip-sub">Download my official CV in standardized format.</p>
               </div>
-              <div className="spec-row">
-                <span className="spec-label">Humor &amp; Memes:</span>
-                <span className="spec-val">Meme Page Creator (@adangaathavanda)</span>
-              </div>
+              <button onClick={onOpenResume} className="btn-rect btn-rect-primary">
+                VIEW RESUME / CV ↓
+              </button>
             </div>
           </div>
 
-          {/* Right Column: 4 Capability Pillars */}
-          <div className="about-pillars-grid">
-            {pillars.map((item) => (
-              <div key={item.title} className="pillar-card">
-                <div className="pillar-icon-wrap">
-                  <Icon name={item.icon || 'code'} size={20} />
+          {/* Right: 4 Structural Pillars */}
+          <div className="about-pillars-stack">
+            {about.highlights.map((h, i) => (
+              <div key={h.title} className="about-pillar-row">
+                <span className="pillar-counter">0{i + 1}</span>
+                <div className="pillar-text-content">
+                  <h4 className="pillar-heading">{h.title}</h4>
+                  <p className="pillar-detail">{h.desc}</p>
                 </div>
-                <h4 className="pillar-title">{item.title}</h4>
-                <p className="pillar-desc">{item.desc}</p>
               </div>
             ))}
           </div>
